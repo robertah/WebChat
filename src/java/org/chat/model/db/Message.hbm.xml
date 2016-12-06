@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-nov-2016 10.27.12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.chat.model.db.Message" table="Message" catalog="chat" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="sender" type="string">
+            <column name="sender" length="25" not-null="true" />
+        </property>
+        <property name="receiver" type="string">
+            <column name="receiver" length="25" not-null="true" />
+        </property>
+        <property name="text" type="string">
+            <column name="text" length="65535" not-null="true" />
+        </property>
+        <property name="senderVisibility" type="java.lang.Boolean">
+            <column name="sender_visibility" />
+        </property>
+        <property name="receiverVisibility" type="java.lang.Boolean">
+            <column name="receiver_visibility" />
+        </property>
+        <property name="datetime" type="timestamp">
+            <column name="datetime" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

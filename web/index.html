@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>Chat | Welcome</title>
+        <link rel="icon" type="image/x-icon" href="image/favicon.ico" />
+        <link rel="stylesheet" href="style/body.css">
+        <link rel="stylesheet" href="style/login.css">
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="module form-module">
+            <div class="toggle"><i class="fa fa-times fa-user-plus"></i>
+                <div class="tooltip">New user?</div>
+            </div>
+            <div class="form">
+                <h2>Login to your account</h2>
+                <form>
+                    <input id="username" type="text" placeholder="username" autofocus="true"/>
+                    <input id="password" type="password" placeholder="password"/>
+                    <button type="submit" onclick="Login.login()">Login</button>
+                </form>
+            </div>
+            <div class="form">
+                <h2>Create an account</h2>
+                <form>
+                    <input id="new_username" type="text" placeholder="username" autofocus="true"/>
+                    <input id="new_password" type="password" placeholder="password"/>
+                    <input id="repeat_password" type="password" placeholder="repeat password"/>
+                    <button type="submit" onclick="Login.signup()">Register</button>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src='script/ajax.js'></script>
+    <script src='script/cookie.js'></script>
+    <script src='script/html.js'></script>
+    <script src='script/login.js'></script>
+    <script>
+                        Cookie.checkCookies();
+                        Login.addToggleHandler();
+    </script>
+</html>
