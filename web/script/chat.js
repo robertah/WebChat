@@ -8,6 +8,8 @@ var timerContacts, timerMessages;
 var sender, receiver;
 var active_conversation = null;
 var delete_msg_id = null;
+var title = "Chat";
+var notification_count = 0;
 
 var Chat = {
 
@@ -27,6 +29,12 @@ var Chat = {
         };
         Ajax.postAjax("LogOut", "/Chat/Gateway", null, JSONparameters, null);
 
+    },
+
+    updateTitle: function () {
+        if (notification_count > 0) {
+            document.title = '(' + notification_count.trim() + ') ' + title;
+        }
     },
 
     logOut: function () {
@@ -53,7 +61,7 @@ var Chat = {
     loadContacts: function () {
         sender = document.getElementById('myUsername').getAttribute('datafld');
         clearInterval(timerContacts);
-        timerContacts = setInterval(Chat.loadContacts, 2000);
+        timerContacts = setInterval(Chat.loadContacts, 1500);
 
         var JSONparameters = {
             "username": sender
@@ -64,13 +72,16 @@ var Chat = {
 
     callbackLoadContacts: function (responseText, parameterRequest, otherParameter) {
 
+        notification_count = 0;
         var parseJSON = JSON.parse(responseText);
         if (parseJSON.contacts !== "empty") {
             HTML.clear('people')
             for (var i = 0; i < parseJSON.contacts.length; i++) {
                 HTML.createPerson(parseJSON.contacts[i].username, parseJSON.contacts[i].online, parseJSON.contacts[i].text, parseJSON.contacts[i].time, parseJSON.contacts[i].unread);
+                notification_count += parseJSON.contacts[i].unread;
             }
         }
+        Chat.updateTitle();
         console.log("CALL BACK LOAD CONTACTS : " + active_conversation.className);
         if (active_conversation !== null)
             active_conversation.className = "person active";
@@ -161,7 +172,7 @@ var Chat = {
             console.log("target id " + "person-id-" + username);
             console.log(active_conversation);
             active_conversation = document.getElementById("person-id-" + username);
-            active_conversation.className= "person active";
+            active_conversation.className = "person active";
             active_conversation.removeAttribute('data-badge');
         }
 
@@ -171,9 +182,9 @@ var Chat = {
         chat.className += " active-chat";
         clearInterval(timerMessages);
         Chat.getMessages(sender, receiver);
-        timerMessages = setInterval(Chat.getNewMessages, 2000, sender, receiver);
+        timerMessages = setInterval(Chat.getNewMessages, 1500, sender, receiver);
         clearInterval(timerContacts);
-        timerContacts = setInterval(Chat.loadContacts, 2000);
+        timerContacts = setInterval(Chat.loadContacts, 1500);
     },
 
     showMenu: function (control, e) {
@@ -199,7 +210,7 @@ var Chat = {
 
         if (r === true && delete_msg_id !== null) {
             var me = document.getElementById('myUsername').getAttribute('datafld');
-
+            console.log("id " + delete_msg_id);
             var JSONparameters = {
                 "me": me,
                 "message": delete_msg_id
@@ -208,7 +219,6 @@ var Chat = {
             Ajax.postAjax("DeleteMessage", "/Chat/Gateway", Chat.callbackDeleteMessage, JSONparameters, null);
 
         }
-        ;
 
         delete_msg_id = null;
     },
