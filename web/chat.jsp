@@ -50,7 +50,7 @@
                             <span id="chatroom" class="name"></span>
                         </span>
                     </div>        
-                    <div id="chatwindow" class="chat" data-chat="person1">               
+                    <ul id="chatwindow" class="chat">               
                         
                        <!--
                         <div class="bubble you">  
@@ -64,7 +64,7 @@
                             I was wondering...         
                         </div>           
                        -->
-                    </div>         
+                    </ul>         
                     <!--
                     <div class="chat" data-chat="person2">      
                         <div class="conversation-start">     

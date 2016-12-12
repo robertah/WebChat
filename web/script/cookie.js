@@ -17,10 +17,6 @@ var Cookie = {
                 Login.loginFromCookies(username, password);
             }
 
-            /*
-             var par = {"userCookie": user, "passwordCookie": password};
-             postAjax("cookieLogin", "/Chat/Gateway", processLoginCookies, par, null);
-             */
         }
     },
 

@@ -179,7 +179,7 @@ var Chat = {
         //clear current chat messages
         HTML.clear('chatwindow');
         var chat = document.getElementById('chatwindow');
-        chat.className += " active-chat";
+        chat.className = "chat active-chat";
         clearInterval(timerMessages);
         Chat.getMessages(sender, receiver);
         timerMessages = setInterval(Chat.getNewMessages, 1500, sender, receiver);

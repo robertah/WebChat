@@ -19,9 +19,9 @@ public class Message implements java.io.Serializable, Comparable<Message> {
     private Boolean receiverVisibility;
     private Date datetime;
 
-    private SimpleDateFormat today = new SimpleDateFormat("HH:mm");
-    private SimpleDateFormat thisWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH);
-    private SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+    private final SimpleDateFormat today = new SimpleDateFormat("HH:mm");
+    private final SimpleDateFormat thisWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH);
+    private final SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 
     public Message() {
     }
@@ -88,9 +88,8 @@ public class Message implements java.io.Serializable, Comparable<Message> {
     }
 
     public String getFormattedDate() {
-        
-        Date today = new Date();
-        if (date.format(today).equals(date.format(datetime))) {
+
+        if (date.format(new Date()).equals(date.format(datetime))) {
             return this.today.format(datetime);
         }
 

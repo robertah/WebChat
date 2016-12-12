@@ -97,16 +97,16 @@ var HTML = {
 
         var parent = document.getElementById('chatwindow');
 
-        var div = document.createElement('div');
+        var ul = document.createElement('ul');
         if (HTML.isMe(sender)) {
-            div.className = 'bubble me';
+            ul.className = 'bubble me';
         } else {
-            div.className = 'bubble you';
+            ul.className = 'bubble you';
         }
-        div.id = "msg_id-" + msg_id;
+        ul.id = "msg_id-" + msg_id;
 
         if (receiver !== "GROUP") {
-            div.setAttribute('oncontextmenu', "Chat.showMenu('deleteMenu', event)");
+            ul.setAttribute('oncontextmenu', "Chat.showMenu('deleteMenu', event)");
         }
 
         var message = document.createElement('span');
@@ -121,11 +121,11 @@ var HTML = {
         id.className = 'msg_id';
         id.innerHTML = msg_id;
 
-        div.appendChild(message);
-        div.appendChild(time);
-        div.appendChild(id);
+        ul.appendChild(message);
+        ul.appendChild(time);
+        ul.appendChild(id);
 
-        parent.appendChild(div);
+        parent.appendChild(ul);
     },
 
     clear: function (node) {
