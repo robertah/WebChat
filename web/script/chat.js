@@ -151,12 +151,9 @@ var Chat = {
         var parseJSON = JSON.parse(responseText);
         if (parseJSON.messages !== "empty") {
             for (let i = 0; i < parseJSON.messages.length; i++) {
-                HTML.createMessage(parseJSON.messages[i].sender, parseJSON.messages[i].receiver, parseJSON.messages[i].text, parseJSON.messages[i].datetime, parseJSON.messages[i].id);
+                HTML.createMessage(parseJSON.messages[i].sender, parseJSON.messages[i].receiver, 
+                                   parseJSON.messages[i].text, parseJSON.messages[i].datetime, parseJSON.messages[i].id);
             }
-            /*
-             var elem = document.getElementById('scroll');
-             elem.scrollTop = elem.scrollHeight;
-             */
         }
     },
 
