@@ -53,7 +53,6 @@ public class MessageHandler {
         LocalDatabase.getMessages().add(m);
 
         (new Thread(new ThreadManager(m, 2))).start();
-        //MessageFacade.addMessage(m);
     }
 
     private static String createMessageJSON(List<Message> messages) {
