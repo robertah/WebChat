@@ -77,7 +77,8 @@ var Chat = {
         if (parseJSON.contacts !== "empty") {
             HTML.clear('people')
             for (var i = 0; i < parseJSON.contacts.length; i++) {
-                HTML.createPerson(parseJSON.contacts[i].username, parseJSON.contacts[i].online, parseJSON.contacts[i].text, parseJSON.contacts[i].time, parseJSON.contacts[i].unread);
+                HTML.createPerson(parseJSON.contacts[i].username, parseJSON.contacts[i].online, 
+                                  parseJSON.contacts[i].text, parseJSON.contacts[i].time, parseJSON.contacts[i].unread);
                 notification_count += parseJSON.contacts[i].unread;
             }
         }
