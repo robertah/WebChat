@@ -8,16 +8,13 @@ var Cookie = {
 
     checkCookies: function () {
 
-        var previousUrl = document.referrer;
-        if (previousUrl.indexOf("chat.jsp") !== -1) {
-            var username = Cookie.getCookie("username");
-            var password = Cookie.getCookie("password");
+        var username = Cookie.getCookie("username");
+        var password = Cookie.getCookie("password");
 
-            if (username !== "" && password !== "") {
-                Login.loginFromCookies(username, password);
-            }
-
+        if (username !== "" && password !== "") {
+            Login.loginFromCookies(username, password);
         }
+
     },
 
     setCookie: function (cname, cvalue, exdays) {
