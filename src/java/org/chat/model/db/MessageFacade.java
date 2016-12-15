@@ -29,8 +29,6 @@ public class MessageFacade {
             Query q = session.createQuery("FROM Message");
 
             messages = (List<Message>) q.list();
-            
-            return messages;
 
         } catch (Exception e) {
             System.out.println(e);
