@@ -10,6 +10,7 @@ var active_conversation = null;
 var delete_msg_id = null;
 var title = "Chat";
 var notification_count = 0;
+var alreadyClicked = false;
 
 var Chat = {
 
@@ -19,7 +20,6 @@ var Chat = {
             "username": sender
         };
         Ajax.postAjax("Connection", "/Chat/Gateway", null, JSONparameters, null);
-
     },
 
     beforeUnload: window.onbeforeunload = function () {
@@ -30,7 +30,7 @@ var Chat = {
         Ajax.postAjax("LogOut", "/Chat/Gateway", null, JSONparameters, null);
 
     },
-
+    
     updateTitle: function () {
         if (notification_count > 0) {
             document.title = '(' + notification_count.trim() + ') ' + title;
@@ -47,8 +47,8 @@ var Chat = {
                 "username": from
             };
 
-            //Cookie.deleteCookie('username');
-            //Cookie.deleteCookie('password');
+            Cookie.deleteCookie('username');
+            Cookie.deleteCookie('password');
 
             Ajax.postAjax("LogOut", "/Chat/Gateway", Chat.callbackLogOut, JSONparameters, null);
         }
@@ -77,15 +77,12 @@ var Chat = {
         if (parseJSON.contacts !== "empty") {
             HTML.clear('people')
             for (var i = 0; i < parseJSON.contacts.length; i++) {
-                HTML.createPerson(parseJSON.contacts[i].username, parseJSON.contacts[i].online, 
-                                  parseJSON.contacts[i].text, parseJSON.contacts[i].time, parseJSON.contacts[i].unread);
+                HTML.createPerson(parseJSON.contacts[i].username, parseJSON.contacts[i].online,
+                        parseJSON.contacts[i].text, parseJSON.contacts[i].time, parseJSON.contacts[i].unread);
                 notification_count += parseJSON.contacts[i].unread;
             }
         }
         Chat.updateTitle();
-        console.log("CALL BACK LOAD CONTACTS : " + active_conversation.className);
-        if (active_conversation !== null)
-            active_conversation.className = "person active";
     },
 
     sendMessage: function () {
@@ -129,8 +126,8 @@ var Chat = {
         if (parseJSON.messages !== "empty") {
             HTML.clear('chatwindow');
             for (let i = 0; i < parseJSON.messages.length; i++) {
-                HTML.createMessage(parseJSON.messages[i].sender, parseJSON.messages[i].receiver, 
-                                 parseJSON.messages[i].text, parseJSON.messages[i].datetime, parseJSON.messages[i].id);
+                HTML.createMessage(parseJSON.messages[i].sender, parseJSON.messages[i].receiver,
+                        parseJSON.messages[i].text, parseJSON.messages[i].datetime, parseJSON.messages[i].id);
             }
         }
     },
@@ -148,19 +145,26 @@ var Chat = {
         var parseJSON = JSON.parse(responseText);
         if (parseJSON.messages !== "empty") {
             for (let i = 0; i < parseJSON.messages.length; i++) {
-                HTML.createMessage(parseJSON.messages[i].sender, parseJSON.messages[i].receiver, 
-                                   parseJSON.messages[i].text, parseJSON.messages[i].datetime, parseJSON.messages[i].id);
+                HTML.createMessage(parseJSON.messages[i].sender, parseJSON.messages[i].receiver,
+                        parseJSON.messages[i].text, parseJSON.messages[i].datetime, parseJSON.messages[i].id);
             }
         }
     },
 
     showConversation: function (username) {
+        
+        if (alreadyClicked === false) {
+            document.getElementById('message_input').removeAttribute('disabled');
+            document.getElementById('send_button').removeAttribute('disabled');
+            document.getElementById('rightside').style.background = 'none';
+            alreadyClicked = true;
+        }
+        
         receiver = username;
         //update chat name span
         var span = document.getElementById('chatroom');
         span.textContent = username;
 
-        console.log("HELLOOO");
         //activate person
         HTML.changeClassName("person active", "person");
         if (event !== null) {

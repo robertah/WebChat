@@ -13,8 +13,8 @@
         <link rel="icon" type="image/x-icon" href="image/favicon.ico" />
         <link rel="stylesheet" href="style/body.css">
         <link rel="stylesheet" href="style/chat.css">
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src='script/jquery.js'></script>
+        <link href="style/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -44,7 +44,7 @@
                         -->
                     </ul>       
                 </div>     
-                <div class="right">   
+                <div class="right" id="rightside">   
                     <div class="top">
                         <span>To: 
                             <span id="chatroom" class="name"></span>
@@ -112,9 +112,9 @@
                     </div>    
                     -->
 
-                    <div class="write">      
-                        <input id="message_input" type="text" placeholder="Type a message here..." onkeypress="Chat.keyPressed(event)"/>
-                        <a class="write-link send" title="Send" onclick="Chat.sendMessage()">
+                    <div class="write" id="bottombar">      
+                        <input id="message_input" type="text" placeholder="Type a message here..." onkeypress="Chat.keyPressed(event)" disabled/>
+                        <a id="send_button" class="write-link send" title="Send" onclick="Chat.sendMessage()" disabled>
                             <i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i>
                         </a>
 

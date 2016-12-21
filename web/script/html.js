@@ -7,7 +7,7 @@
 var HTML = {
 
     isMe: function (username) {
-        if (username !== document.getElementById('myUsername').getAttribute('datafld'))
+        if (username.toUpperCase() !== document.getElementById('myUsername').getAttribute('datafld').toUpperCase())
             return false;
         return true;
     },
