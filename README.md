@@ -1,3 +1,3 @@
-#Web-chat application
+# Web-chat application
 
 ![alt test](img/main.png)
